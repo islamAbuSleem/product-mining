@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Deals Results - Product Mining</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface-variant": "#434655",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#b7c8e1",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary-fixed-variant": "#3f465c",
+                        "on-surface": "#191c1e",
+                        "tertiary": "#46566c",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "error": "#ba1a1a",
+                        "secondary": "#565e74",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "tertiary-fixed": "#d3e4fe",
+                        "secondary-fixed-dim": "#bec6e0",
+                        "on-primary": "#ffffff",
+                        "surface-tint": "#0053db",
+                        "primary-container": "#2563eb",
+                        "on-primary-fixed": "#00174b",
+                        "primary": "#004ac6",
+                        "on-secondary-container": "#5c647a",
+                        "secondary-container": "#dae2fd",
+                        "secondary-fixed": "#dae2fd",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-fixed": "#131b2e",
+                        "on-tertiary-fixed": "#0b1c30",
+                        "on-tertiary-container": "#e9f0ff",
+                        "surface-dim": "#d8dadc",
+                        "outline-variant": "#c3c6d7",
+                        "inverse-surface": "#2d3133",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-fixed-variant": "#38485d",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary-fixed": "#dbe1ff",
+                        "tertiary-container": "#5e6e85",
+                        "outline": "#737686",
+                        "surface": "#f7f9fb",
+                        "on-primary-container": "#eeefff",
+                        "surface-container": "#eceef0",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-error-container": "#93000a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "2xl": "48px",
+                        "sm": "8px",
+                        "gutter": "20px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xs": "4px",
+                        "base": "4px",
+                        "max-width": "1440px",
+                        "margin-desktop": "40px",
+                        "xl": "32px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "title-lg": ["Inter"],
+                        "headline-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "title-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .glass-card {
+                @apply bg-surface-container-lowest/90 backdrop-blur-md border border-slate-200 shadow-sm transition-all duration-300;
+            }
+            .glass-card:hover {
+                @apply border-primary-container shadow-md translate-y-[-2px];
+            }
+            .filter-section {
+                @apply pb-md border-b border-outline-variant mb-md;
+            }
+            .filter-section:last-child {
+                @apply border-0 mb-0 pb-0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md antialiased flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface w-full z-50 sticky top-0 border-b border-outline-variant dark:border-outline flat no shadows">
+<div class="flex justify-between items-center h-16 px-margin-desktop max-w-max-width mx-auto w-full">
+<!-- Brand & Search Container -->
+<div class="flex items-center gap-xl flex-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="hub">hub</span>
+<span class="font-title-lg text-title-lg font-bold text-primary dark:text-primary-fixed-dim">Product Mining</span>
+</div>
+<!-- Search Bar (on_left as per JSON) -->
+<div class="hidden md:flex flex-1 max-w-md relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant z-10" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant text-on-surface pl-10 pr-4 py-2 rounded-DEFAULT focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all font-body-md text-body-md shadow-inner" placeholder="Search products, brands, or SKUs..." type="text" value="Noise Cancelling Headphones"/>
+<!-- Search Status Indicator -->
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+<span class="font-label-md text-label-md text-secondary">Results Synced</span>
+</div>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-lg h-full">
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">Search</a>
+<a class="h-full flex items-center text-primary dark:text-primary-fixed-dim border-b-2 border-primary dark:border-primary-fixed-dim font-body-md text-body-md Active: opacity-80 transition-all duration-200" href="#">Deals</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">History</a>
+<a class="h-full flex items-center text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors font-body-md text-body-md" href="#">Analytics</a>
+</nav>
+<!-- Trailing Icons -->
+<div class="flex items-center gap-md ml-xl">
+<button aria-label="Notifications" class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-DEFAULT hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button aria-label="History" class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-DEFAULT hover:bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container border border-outline-variant overflow-hidden cursor-pointer">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A small, professional avatar portrait of a business user in a modern corporate setting. Well lit, shallow depth of field, neutral background, high resolution, realistic style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuACkObZLvMRiLtJAq7Y9w1xDWzT83KcWbH0lGRkXS4kMrfw5TJdV9QlLx3G1Zm9J86lohTGnjxf2goZhvwE2vzcqJWe9y6kEfHiQWHNl0rc_askboETUBY9GHJiuX7z3AFeKWf6yKT3RjYKag8z5HHTbhwj_i0oZXr2QgUeRY3D8qa1NmvQDXLZIcle-BptO379yGq3ShzFks2VBThUHxToIUMO-2QrFJUPwX2PiPoeBHkVpApIRYov"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Layout -->
+<main class="flex-1 max-w-max-width mx-auto w-full px-margin-mobile md:px-margin-desktop py-lg grid grid-cols-1 md:grid-cols-12 gap-lg relative">
+<!-- Sidebar Filters -->
+<aside class="md:col-span-3 lg:col-span-2 space-y-md">
+<div class="bg-surface-container-lowest rounded-lg border border-slate-200 p-md sticky top-[100px]">
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-title-md text-title-md text-on-surface">Filters</h2>
+<button class="text-primary font-label-md text-label-md hover:underline">Reset</button>
+</div>
+<div class="filter-section">
+<h3 class="font-label-md text-label-md text-secondary mb-sm uppercase">Price Range</h3>
+<div class="space-y-sm">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Under $50</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">$50 - $150</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">$150 - $300</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Over $300</span>
+</label>
+</div>
+</div>
+<div class="filter-section">
+<h3 class="font-label-md text-label-md text-secondary mb-sm uppercase">Retailer</h3>
+<div class="space-y-sm">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">TechMart</span>
+<span class="ml-auto font-label-sm text-label-sm text-secondary bg-surface-container-low px-1.5 py-0.5 rounded-DEFAULT">24</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">AudioWorld</span>
+<span class="ml-auto font-label-sm text-label-sm text-secondary bg-surface-container-low px-1.5 py-0.5 rounded-DEFAULT">18</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">MegaStore</span>
+<span class="ml-auto font-label-sm text-label-sm text-secondary bg-surface-container-low px-1.5 py-0.5 rounded-DEFAULT">9</span>
+</label>
+</div>
+</div>
+<div class="filter-section">
+<h3 class="font-label-md text-label-md text-secondary mb-sm uppercase">Condition</h3>
+<div class="space-y-sm">
+<label class="flex items-center gap-2 cursor-pointer group">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">New</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer group">
+<input class="rounded border-outline-variant text-primary focus:ring-primary w-4 h-4" type="checkbox"/>
+<span class="font-body-md text-body-md text-on-surface-variant group-hover:text-primary transition-colors">Refurbished</span>
+</label>
+</div>
+</div>
+</div>
+</aside>
+<!-- Results Canvas -->
+<div class="md:col-span-9 lg:col-span-10 space-y-md">
+<!-- Context Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-md mb-lg">
+<div>
+<p class="font-label-md text-label-md text-secondary mb-1">Showing 51 deals for</p>
+<h1 class="font-headline-md text-headline-md text-on-surface">"Noise Cancelling Headphones"</h1>
+</div>
+<div class="flex items-center gap-sm">
+<span class="font-label-md text-label-md text-secondary">Sort by:</span>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-DEFAULT font-body-md text-body-md text-on-surface py-1.5 pl-3 pr-8 focus:ring-primary focus:border-primary">
+<option>Ranked Value</option>
+<option>Price: Low to High</option>
+<option>Discount %</option>
+</select>
+</div>
+</div>
+<!-- Bento Grid of Results -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-md">
+<!-- Ranked Deal Card 1 -->
+<article class="glass-card rounded-lg flex flex-col relative overflow-hidden group cursor-pointer h-full">
+<div class="absolute top-sm left-sm z-10 flex items-center gap-1 bg-yellow-100 text-yellow-800 px-2 py-1 rounded-DEFAULT border border-yellow-200">
+<span class="material-symbols-outlined text-[14px]" data-icon="trophy" data-weight="fill">trophy</span>
+<span class="font-label-sm text-label-sm font-bold">#1 Best Value</span>
+</div>
+<div class="h-48 bg-surface-container-low relative w-full flex items-center justify-center border-b border-outline-variant p-4">
+<img alt="Sony WH-1000XM5" class="h-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-300" data-alt="High-end sleek black over-ear noise cancelling headphones on a clean white studio background. Product photography style, sharp focus, crisp lighting, modern minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWkXIzomnU8xITB-Ry3V1ZyzmhuqoZiV5zAWriJekJqD64bu0TnEljkc9exzMsY4slDIvkxDhrFqQWSEGCRXFAVpj5Ijh5fm7eLN0Du419Y-OBJFi7Lbzbm3TlFew2WExADT3yg1z6dSI_oMfFGH-iVc9DU2Otyat2cm9lIrtiwlcFi4n95jXGCeMbGzoINNMXOPK823pBu22SRiytmMAYtc-H1CjqQSBF7fXCbjyANjZYdIl7J7_J"/>
+</div>
+<div class="p-md flex flex-col flex-1">
+<div class="flex justify-between items-start mb-sm gap-2">
+<h3 class="font-title-md text-title-md text-on-surface line-clamp-2 leading-tight">Sony WH-1000XM5 Wireless Noise-Canceling Headphones</h3>
+<button aria-label="Save Deal" class="text-outline hover:text-primary transition-colors p-1">
+<span class="material-symbols-outlined" data-icon="bookmark">bookmark</span>
+</button>
+</div>
+<div class="flex items-center gap-2 mb-sm">
+<span class="material-symbols-outlined text-secondary text-[16px]" data-icon="storefront">storefront</span>
+<span class="font-label-md text-label-md text-secondary">TechMart Electronics</span>
+</div>
+<div class="mt-auto pt-md border-t border-outline-variant flex items-end justify-between">
+<div>
+<div class="flex items-baseline gap-2">
+<span class="font-title-lg text-title-lg text-primary">$298.00</span>
+<span class="font-label-sm text-label-sm text-secondary line-through">$398.00</span>
+</div>
+<span class="font-label-sm text-label-sm text-green-600 block mt-1">25% Drop (Last 24h)</span>
+</div>
+<a class="bg-primary-container text-on-primary font-label-md text-label-md px-4 py-2 rounded-DEFAULT flex items-center gap-1 hover:bg-primary transition-colors shadow-sm" href="#" onclick="event.stopPropagation()">
+                                View Deal
+                                <span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+</div>
+</article>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface w-full mt-auto border-t border-outline-variant dark:border-outline flat no shadows font-label-md text-label-md flex flex-col md:flex-row justify-between items-center py-xl px-margin-desktop max-w-max-width mx-auto">
+<div class="flex flex-col md:flex-row items-center gap-md md:gap-xl w-full justify-between">
+<div class="font-title-md text-title-md font-bold text-on-surface dark:text-inverse-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+                Product Mining
+            </div>
+<div class="flex flex-wrap justify-center gap-md text-secondary dark:text-secondary-fixed-dim">
+<a class="hover:underline hover:text-primary dark:hover:text-primary-fixed-dim Transition-all duration-150" href="#">Documentation</a>
+<a class="hover:underline hover:text-primary dark:hover:text-primary-fixed-dim Transition-all duration-150" href="#">Analytics API</a>
+<a class="hover:underline hover:text-primary dark:hover:text-primary-fixed-dim Transition-all duration-150" href="#">Terms of Service</a>
+<a class="hover:underline hover:text-primary dark:hover:text-primary-fixed-dim Transition-all duration-150" href="#">Privacy Policy</a>
+<a class="hover:underline hover:text-primary dark:hover:text-primary-fixed-dim Transition-all duration-150" href="#">Support</a>
+</div>
+<div class="text-secondary dark:text-secondary-fixed-dim text-center md:text-right">
+                © 2024 Product Mining. Professional Grade Market Intelligence.
+            </div>
+</div>
+</footer>
+</body></html>
