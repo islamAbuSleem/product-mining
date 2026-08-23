@@ -8,7 +8,7 @@ type DealCardProps = {
   rank?: number;
   merchant: string;
   title: string;
-  imageUrl: string;
+  imageUrl?: string;
   price: string;
   originalPrice?: string;
   dropLabel?: string;
@@ -43,12 +43,16 @@ export function DealCard({
           <Icon name="bookmark" />
         </button>
       </div>
-      <div className="h-48 bg-surface-container-low relative w-full overflow-hidden border-b border-outline-variant">
-        <img
-          alt={title}
-          src={imageUrl}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
+      <div className="h-48 bg-surface-container-low relative w-full overflow-hidden border-b border-outline-variant flex items-center justify-center p-4">
+        {imageUrl ? (
+          <img
+            alt={title}
+            src={imageUrl}
+            className="max-h-full max-w-full object-contain mix-blend-multiply group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <Icon name="image" size={48} className="text-outline" />
+        )}
       </div>
       <div className="p-4 flex flex-col flex-1 gap-3">
         <div>
