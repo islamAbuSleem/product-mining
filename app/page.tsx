@@ -40,7 +40,7 @@ function SectionTitle({ children }: { children: string }) {
   );
 }
 
-export default function DesignSystemPage() {
+export default function Home() {
   return (
     <>
       <TopNav showInlineSearch searchValue="Noise Cancelling Headphones" statusTone="synced" />
