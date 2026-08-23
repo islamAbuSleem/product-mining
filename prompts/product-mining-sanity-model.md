@@ -66,7 +66,7 @@ Out of scope: full search API LLM wiring, PostHog instrumentation, catalog/produ
 - `npx sanity schema deploy` (or `sanity deploy` per installed CLI) succeeds against dataset `production` project `6agch6zz` (or reports no drift if already deployed).
 - `npx sanity typegen generate` updates `sanity.types.ts` with `Product`, `TrackedSearch`, `SearchConfig`, `AlternativeSeller`, `Price`, `ListingSite` types.
 - Visiting `/studio` shows three types: Products (can create with all four requested fields + slug/image), Search Config (single doc), Tracked Searches (list, filtered by userId in GROQ).
-- `santiyFetch` query `*[_type=="product"][0]{title, price, listingSite, alternativeSellers}` returns typed data visible in Vision.
+- `sanityFetch` query `*[_type=="product"][0]{title, price, listingSite, alternativeSellers}` returns typed data visible in Vision.
 
 ## Checks to run
 - From repo root (web = root, Studio embedded): `npm run lint`, `npx tsc --noEmit`, `npx sanity schema deploy --dataset production` (dry-run if no token), `npx sanity typegen generate`, `npm run build --webpack` if routes changed.
