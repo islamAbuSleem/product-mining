@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Show, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 import { NavLinks } from "./nav-links";
 import { Icon } from "../ui/icon";
 import { Input } from "../ui/input";
@@ -11,8 +12,7 @@ const defaultNavItems = [
   { label: "Analytics", href: "/analytics" },
 ] as const;
 
-const AVATAR_URL =
-  "https://lh3.googleusercontent.com/aida-public/AB6AXuAyxm4-3sOreJlX_yBkYPx1akhpfQnY_sxMHffyBNyX6ePjmRDjMYhi4fbOLzOdu-Rwr5WaA0oeHIjN7gL-vujz1_1HVklzAQmjypF1lMFItogx5mtl4kcynUhP30AgxI2W1i8UjESR2eIZjjMUi8uf0RoQ27D01zvxZWXJ5WOX4nNutpfif9-VF5v8X3Z7LQRct_wusqJiLsNTly8MRBKJcN9CcWSHjUYwQ6z4uzeaWXcK58AE3xhI";
+
 
 type TopNavProps = {
   items?: ReadonlyArray<{ label: string; href: string }>;
@@ -71,11 +71,27 @@ export function TopNav({
           >
             <Icon name="history" />
           </button>
-          <img
-            alt="User profile"
-            src={AVATAR_URL}
-            className="w-8 h-8 rounded-full border border-outline-variant object-cover cursor-pointer bg-secondary-container"
-          />
+          <Show when="signed-out">
+            <SignInButton>
+              <button
+                type="button"
+                className="text-label-md text-on-surface-variant hover:text-primary hover:bg-surface-container-low px-3 py-1.5 rounded-sm transition-colors"
+              >
+                Sign in
+              </button>
+            </SignInButton>
+            <SignUpButton>
+              <button
+                type="button"
+                className="bg-primary text-on-primary text-label-md px-4 py-1.5 rounded-sm hover:bg-primary-container shadow-sm transition-colors"
+              >
+                Sign up
+              </button>
+            </SignUpButton>
+          </Show>
+          <Show when="signed-in">
+            <UserButton />
+          </Show>
         </div>
       </div>
     </header>
